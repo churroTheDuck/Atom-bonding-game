@@ -1,6 +1,10 @@
 var compound;
+var element1;
+var element2;
 var electrons = [];
-var selectedElectron = 5;
+var selectedElectron = 12;
+var row;
+var column
 var table = [
   ["H", "Li", "Na", "K", "Rb", "Cs", "Fr"],
   ["Be", "Mg", "Ca", "Sr", "Ba", "Ra"],
@@ -18,23 +22,41 @@ function setup() {
   imageMode(CENTER);
   ellipseMode(CENTER);
   textAlign(CENTER, CENTER);
+
+  column = Math.floor(Math.random() * 2 + 1);
+  row = Math.floor(Math.random() * table[column].length);
+  element1 = table[column][row];
+
+  column = table.length - column - 1;
+  row = Math.floor(Math.random() * table[column].length);
+  element2 = table[column][row];
+  print(table[column][row]);
+
   electrons = [
-    { x: width / 3 - 50, y: height / 2 - 140, bond: -1 },
-    { x: width / 3 + 50, y: height / 2 - 140, bond: -1 },
-    { x: width / 3 - 50, y: height / 2 + 140, bond: -1 },
-    { x: width / 3 + 50, y: height / 2 + 140, bond: -1 },
-    { x: width / 3 - 140, y: height / 2 - 50, bond: -1 },
-    { x: width / 3 + 140, y: height / 2 - 50, bond: 5 },
-    { x: width / 3 - 140, y: height / 2 + 50, bond: -1 },
-    { x: width / 3 + 140, y: height / 2 + 50, bond: -1 },
-    { x: width * 2 / 3 + 50, y: height / 2 - 140, bond: -1 },
-    { x: width * 2 / 3 - 50, y: height / 2 - 140, bond: -1 },
-    { x: width * 2 / 3 + 50, y: height / 2 + 140, bond: -1 },
-    { x: width * 2 / 3 - 50, y: height / 2 + 140, bond: -1 },
-    { x: width * 2 / 3 + 140, y: height / 2 - 50, bond: -1 },
-    { x: width * 2 / 3 - 140, y: height / 2 - 50, bond: -1 },
-    { x: width * 2 / 3 + 140, y: height / 2 + 50, bond: -1 },
-    { x: width * 2 / 3 - 140, y: height / 2 + 50, bond: -1 },
+    { x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1 },
+    { x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1 },
+    { x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1 },
+    { x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1 },
+    { x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1 },
+    { x: width * 1 / 4 - 140, y: height / 2 - 50, bond: -1 },
+    { x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1 },
+    { x: width * 1 / 4 - 140, y: height / 2 + 50, bond: -1 },
+    { x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1 },
+    { x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1 },
+    { x: width * 2 / 4 - 50, y: height / 2 + 140, bond: -1 },
+    { x: width * 2 / 4 + 50, y: height / 2 + 140, bond: -1 },
+    { x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1 },
+    { x: width * 2 / 4 + 140, y: height / 2 - 50, bond: -1 },
+    { x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1 },
+    { x: width * 2 / 4 + 140, y: height / 2 + 50, bond: -1 },
+    { x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1 },
+    { x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1 },
+    { x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1 },
+    { x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1 },
+    { x: width * 3 / 4 + 140, y: height / 2 - 50, bond: -1 },
+    { x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1 },
+    { x: width * 3 / 4 + 140, y: height / 2 + 50, bond: -1 },
+    { x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1 },
   ];
 }
 
@@ -43,21 +65,30 @@ function draw() {
   noStroke();
 
   fill("#EACE5C");
-  ellipse(width / 3, height / 2, 200, 200);
+  ellipse(width * 1 / 4, height / 2, 200, 200);
   fill("000000");
   textSize(100);
-  text("Na", width / 3, height / 2);
+  text(element1, width * 1 / 4, height / 2);
+
+  fill("#EACE5C");
+  ellipse(width * 2 / 4, height / 2, 200, 200);
+  fill("000000");
+  textSize(100);
+  text(element1, width * 2 / 4, height / 2);
   // First atom with text
 
   fill("#8CED8C");
-  ellipse(width * 2 / 3, height / 2, 200, 200);
+  ellipse(width * 3 / 4, height / 2, 200, 200);
   fill("#000000");
   textSize(100);
-  text("Cl", width * 2 / 3, height / 2);
+  text(element2, width * 3 / 4, height / 2);
   // Second atom with text
 
   for (i = 0; i < electrons.length; i++) {
-    if (selectedElectron != -1 && i - 8 == selectedElectron) {
+    if (
+      (((selectedElectron % 8 == 4 || selectedElectron % 8 == 6) && i == selectedElectron - 8)
+      || (selectedElectron % 8 == 5 || selectedElectron % 8 == 7) && i == selectedElectron + 8)
+    ) {
       fill("#A5D8FF")
       ellipse(electrons[i].x, electrons[i].y, 60 * sin(frameCount / 25), 60 * sin(frameCount / 25));
     }
@@ -68,8 +99,10 @@ function draw() {
     textSize(20);
     if (i < 8) {
       text(i, electrons[i].x, electrons[i].y);
-    } else {
+    } else if (i < 16) {
       text(i - 8, electrons[i].x, electrons[i].y);
+    } else {
+      text(i - 16, electrons[i].x, electrons[i].y);
     }
 
     push();
@@ -98,10 +131,15 @@ function mousePressed() {
       && electrons[i].y - 20 < mouseY) {
       if (selectedElectron == i) {
         selectedElectron = -1;
-       } else if (i < 8) {
+       } else if (
+        (i < 16 && i > 8 && (i == 12 || i == 14 || i == 13 || i == 15))
+        ) {
         selectedElectron = i;
         electrons[selectedElectron].bond = -1;
-      } else {
+      } else if (
+        (((selectedElectron % 8 == 4 || selectedElectron % 8 == 6) && i == selectedElectron - 8)
+      || (selectedElectron % 8 == 5 || selectedElectron % 8 == 7) && i == selectedElectron + 8)
+      ) {
         electrons[selectedElectron].bond = i;
         selectedElectron = -1;
       }
