@@ -3,7 +3,7 @@ var element1;
 var element2;
 var element3;
 var electrons = [];
-var selectedElectron = 12;
+var selectedElectron = -1;
 var randomCompound;
 var table = [
   ["H", "Li", "Na", "K", "Rb", "Cs", "Fr"],
@@ -25,43 +25,43 @@ function setup() {
 
   h2o = [
     [
-      { x: width * 1 / 4 + 140, y: height / 2, bond: -1},
+      { x: width * 1 / 4 + 140, y: height / 2, bond: -1, id: 0},
     ],
     [
-      { x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1 },
-      { x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1 },
-      { x: width * 2 / 4 + 50, y: height / 2 + 140, bond: -1 },
-      { x: width * 2 / 4 - 50, y: height / 2 + 140, bond: -1 },
-      { x: width * 2 / 4 - 140, y: height / 2, bond: -1 },
-      { x: width * 2 / 4 + 140, y: height / 2, bond: -1 },
+      { x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 1},
+      { x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 2},
+      { x: width * 2 / 4 + 50, y: height / 2 + 140, bond: -1, id: 3},
+      { x: width * 2 / 4 - 50, y: height / 2 + 140, bond: -1, id: 4},
+      { x: width * 2 / 4 - 140, y: height / 2, bond: -1, id: 5},
+      { x: width * 2 / 4 + 140, y: height / 2, bond: -1, id: 6},
     ],
     [
-      { x: width * 3 / 4 - 140, y: height / 2, bond: -1},
+      { x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 7},
     ],
   ]
 
   co2 = [
     [
-      { x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1 },
-      { x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1 },
-      { x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1 },
-      { x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1 },
-      { x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1 },
-      { x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1 },
+      { x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1, id: 0},
+      { x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1, id: 1},
+      { x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1, id: 2},
+      { x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1, id: 3},
+      { x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1, id: 4},
+      { x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1, id: 5},
     ],
     [
-      { x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1 },
-      { x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1 },
-      { x: width * 2 / 4 + 140, y: height / 2 - 50, bond: -1 },
-      { x: width * 2 / 4 + 140, y: height / 2 + 50, bond: -1 },
+      { x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1, id: 6},
+      { x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1, id: 7},
+      { x: width * 2 / 4 + 140, y: height / 2 - 50, bond: -1, id: 8},
+      { x: width * 2 / 4 + 140, y: height / 2 + 50, bond: -1, id: 9},
     ],
     [
-      { x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1 },
-      { x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1 },
-      { x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1 },
-      { x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1 },
-      { x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1 },
-      { x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1 },
+      { x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1, id: 10},
+      { x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1, id: 11},
+      { x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1, id: 12},
+      { x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1, id: 13},
+      { x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1, id: 14},
+      { x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1, id: 15},
     ],
   ]
 
@@ -131,8 +131,9 @@ function draw() {
   for (x = 0; x < electrons.length; x++) {
     for (y = 0; y < electrons[x].length; y++) {
     if (
-      (((selectedElectron % 8 == 4 || selectedElectron % 8 == 6) && y == selectedElectron - 8)
-      || (selectedElectron % 8 == 5 || selectedElectron % 8 == 7) && y == selectedElectron + 8)
+      selectedElectron != -1
+      && (electrons[x][y].x == width * 1 / 4 + 140
+      || electrons[x][y].x == width * 3 / 4 - 140)
     ) {
       fill("#A5D8FF")
       ellipse(electrons[x][y].x, electrons[x][y].y, 60 * sin(frameCount / 25), 60 * sin(frameCount / 25));
@@ -140,13 +141,21 @@ function draw() {
 
     fill("#FFFFFF");
     ellipse(electrons[x][y].x, electrons[x][y].y, 40, 40);
-    text(y, electrons[x][y].x, electrons[x][y].y);
+    fill("#000000");
+    textSize(20);
+    text(electrons[x][y].id, electrons[x][y].x, electrons[x][y].y);
 
     push();
     stroke("#FFFFFF");
     strokeWeight(40);
     if (electrons[x][y].bond != -1) {
-      line(electrons[x][y].x, electrons[x][y].y, electrons[electrons[x][y].bond].x, electrons[electrons[x][y].bond].y);
+      for (var x1 = 0; x1 < electrons.length; x1 ++) {
+        for (var y1 = 0; y1 < electrons[x1].length; y1 ++) {
+          if (electrons[x1][y1].id == electrons[x][y].bond) {
+          line(electrons[x][y].x, electrons[x][y].y, electrons[x1][y1].x, electrons[x1][y1].y);
+          }
+        }
+      }
     }
     pop();
     }
@@ -156,34 +165,51 @@ function draw() {
   stroke("#FFFFFF");
   strokeWeight(40);
   if (selectedElectron != -1) {
-    line(electrons[selectedElectron].x, electrons[selectedElectron].y, mouseX, mouseY);
+    for (x = 0; x < electrons.length; x++) {    
+      for (y = 0; y < electrons[x].length; y++) {
+        if (electrons[x][y].id == selectedElectron) {
+          line(electrons[x][y].x, electrons[x][y].y, mouseX, mouseY);
+        }
+     }
+    }
   }
 }
 
-/*function mousePressed() {
-  for (i = 0; i < electrons.length; i++) {
-    if (
-      electrons[i].x + 20 > mouseX
-      && electrons[i].x - 20 < mouseX
-      && electrons[i].y + 20 > mouseY
-      && electrons[i].y - 20 < mouseY) {
-      if (selectedElectron == i) {
-        selectedElectron = -1;
-       } else if (
-        (i < 16 && i > 8 && (i == 12 || i == 14 || i == 13 || i == 15))
+function mousePressed() {
+  for (x = 0; x < electrons.length; x++) {
+    for (y = 0; y < electrons[x].length; y++) {
+      if (
+        electrons[x][y].x + 20 > mouseX
+        && electrons[x][y].x - 20 < mouseX
+        && electrons[x][y].y + 20 > mouseY
+        && electrons[x][y].y - 20 < mouseY) {
+        if (selectedElectron == electrons[x][y].id) {
+          selectedElectron = -1;
+        } else if (
+          (electrons[x][y].x == width / 2 - 140 || electrons[x][y].x == width / 2 + 140)
+          ) {
+          selectedElectron = electrons[x][y].id;
+          if (electrons[x][y].id == selectedElectron) {
+            electrons[x][y].bond = -1;
+          }
+        } else if ( true
+          /*(((selectedElectron % 8 == 4 || selectedElectron % 8 == 6) && i == selectedElectron - 8)
+        || (selectedElectron % 8 == 5 || selectedElectron % 8 == 7) && i == selectedElectron + 8)*/
         ) {
-        selectedElectron = i;
-        electrons[selectedElectron].bond = -1;
-      } else if (
-        (((selectedElectron % 8 == 4 || selectedElectron % 8 == 6) && i == selectedElectron - 8)
-      || (selectedElectron % 8 == 5 || selectedElectron % 8 == 7) && i == selectedElectron + 8)
-      ) {
-        electrons[selectedElectron].bond = i;
-        selectedElectron = -1;
+          for (var x1 = 0; x1 < electrons.length; x1 ++) {
+            for (var y1 = 0; y1 < electrons[x1].length; y1 ++) {
+              if (selectedElectron == electrons[x1][y1].id) {
+                electrons[x1][y1].bond = electrons[x][y].id;
+                selectedElectron = -1;
+              }
+            }
+          }
+        }
       }
     }
-  }
-}*/
+  } 
+}
 
 function keyPressed() {
+  print(electrons);
 }
