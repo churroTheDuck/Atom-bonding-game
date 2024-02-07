@@ -1,10 +1,10 @@
 var compound;
 var element1;
 var element2;
+var element3;
 var electrons = [];
 var selectedElectron = 12;
-var row;
-var column
+var randomCompound;
 var table = [
   ["H", "Li", "Na", "K", "Rb", "Cs", "Fr"],
   ["Be", "Mg", "Ca", "Sr", "Ba", "Ra"],
@@ -23,15 +23,6 @@ function setup() {
   ellipseMode(CENTER);
   textAlign(CENTER, CENTER);
 
-  column = Math.floor(Math.random() * 2 + 1);
-  row = Math.floor(Math.random() * table[column].length);
-  element1 = table[column][row];
-
-  column = table.length - column - 1;
-  row = Math.floor(Math.random() * table[column].length);
-  element2 = table[column][row];
-  print(table[column][row]);
-
   h2o = [
     [
       { x: width * 1 / 4 + 140, y: height / 2, bond: -1},
@@ -47,6 +38,36 @@ function setup() {
     [
       { x: width * 3 / 4 - 140, y: height / 2, bond: -1},
     ],
+  ]
+
+  co2 = [
+    [
+      { x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1 },
+      { x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1 },
+      { x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1 },
+      { x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1 },
+      { x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1 },
+      { x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1 },
+    ],
+    [
+      { x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1 },
+      { x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1 },
+      { x: width * 2 / 4 + 140, y: height / 2 - 50, bond: -1 },
+      { x: width * 2 / 4 + 140, y: height / 2 + 50, bond: -1 },
+    ],
+    [
+      { x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1 },
+      { x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1 },
+      { x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1 },
+      { x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1 },
+      { x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1 },
+      { x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1 },
+    ],
+  ]
+
+  compounds = [
+    {name: "H2O", c1: "H", c2: "O", c3: "H", array: h2o},
+    {name: "CO2", c1: "O", c2: "C", c3: "O", array: co2},
   ]
 
   electrons = [
@@ -76,31 +97,35 @@ function setup() {
     { x: width * 3 / 4 + 140, y: height / 2 + 50, bond: -1 },
     { x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1 },*/
   ];
-  electrons = h2o
+  randomCompound = Math.floor(Math.random() * compounds.length);
+  electrons = compounds[randomCompound].array
+  element1 = compounds[randomCompound].c1
+  element2 = compounds[randomCompound].c2
+  element3 = compounds[randomCompound].c3
 }
 
 function draw() {
   background("#1E1E1E");
   noStroke();
 
-  fill("#EACE5C");
+  fill("#8CED8C");
   ellipse(width * 1 / 4, height / 2, 200, 200);
-  fill("000000");
+  fill("#000000");
   textSize(100);
   text(element1, width * 1 / 4, height / 2);
 
-  fill("#EACE5C");
+  fill("#8CED8C");
   ellipse(width * 2 / 4, height / 2, 200, 200);
-  fill("000000");
+  fill("#000000");
   textSize(100);
-  text(element1, width * 2 / 4, height / 2);
+  text(element2, width * 2 / 4, height / 2);
   // First atom with text
 
   fill("#8CED8C");
   ellipse(width * 3 / 4, height / 2, 200, 200);
   fill("#000000");
   textSize(100);
-  text(element2, width * 3 / 4, height / 2);
+  text(element3, width * 3 / 4, height / 2);
   // Second atom with text
 
   for (x = 0; x < electrons.length; x++) {
@@ -114,8 +139,8 @@ function draw() {
     }
 
     fill("#FFFFFF");
-    print(electrons[x][y].x)
     ellipse(electrons[x][y].x, electrons[x][y].y, 40, 40);
+    text(y, electrons[x][y].x, electrons[x][y].y);
 
     push();
     stroke("#FFFFFF");
@@ -161,5 +186,4 @@ function draw() {
 }*/
 
 function keyPressed() {
-  print(selectedElectron);
 }
