@@ -5,6 +5,7 @@ var element2;
 var element3;
 var electrons = [];
 var selectedElectron = -1;
+var correct;
 var randomCompound;
 /*var table = [
 	["H", "Li", "Na", "K", "Rb", "Cs", "Fr"],
@@ -81,7 +82,7 @@ function setup() {
 			{ x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1, id: 14 },
 			{ x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1, id: 15 },
 		],
-	]	
+	]
 
 	var co2Answer = [
 		[
@@ -106,8 +107,8 @@ function setup() {
 			{ x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1, id: 14 },
 			{ x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1, id: 15 },
 		],
-	]	
-	
+	]
+
 	var h2s = [
 		[
 			{ x: width * 1 / 4 + 140, y: height / 2, bond: -1, id: 0 },
@@ -181,31 +182,31 @@ function setup() {
 	]
 
 	var nocl = [
-	[
-		{ x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1, id: 0 },
-		{ x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1, id: 1 },
-		{ x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1, id: 2 },
-		{ x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1, id: 3 },
-		{ x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1, id: 4 },
-		{ x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1, id: 5 },
-	],
-	[
-		{ x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1, id: 6 },
-		{ x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1, id: 7 },
-		{ x: width * 2 / 4 + 140, y: height / 2, bond: -1, id: 8 },
-		{ x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 9 },
-		{ x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 10 },
+		[
+			{ x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1, id: 0 },
+			{ x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1, id: 1 },
+			{ x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1, id: 2 },
+			{ x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1, id: 3 },
+			{ x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1, id: 4 },
+			{ x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1, id: 5 },
+		],
+		[
+			{ x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1, id: 6 },
+			{ x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1, id: 7 },
+			{ x: width * 2 / 4 + 140, y: height / 2, bond: -1, id: 8 },
+			{ x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 9 },
+			{ x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 10 },
 
-	],
-	[
-		{ x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1, id: 11 },
-		{ x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1, id: 12 },
-		{ x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1, id: 13 },
-		{ x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1, id: 14 },
-		{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 15 },
-		{ x: width * 3 / 4 + 140, y: height / 2 - 50, bond: -1, id: 16 },
-		{ x: width * 3 / 4 + 140, y: height / 2 + 50, bond: -1, id: 17 },
-	],
+		],
+		[
+			{ x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1, id: 11 },
+			{ x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1, id: 12 },
+			{ x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1, id: 13 },
+			{ x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1, id: 14 },
+			{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 15 },
+			{ x: width * 3 / 4 + 140, y: height / 2 - 50, bond: -1, id: 16 },
+			{ x: width * 3 / 4 + 140, y: height / 2 + 50, bond: -1, id: 17 },
+		],
 	]
 
 	var noclAnswer = [
@@ -223,7 +224,7 @@ function setup() {
 			{ x: width * 2 / 4 + 140, y: height / 2, bond: 15, id: 8 },
 			{ x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 9 },
 			{ x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 10 },
-	
+
 		],
 		[
 			{ x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1, id: 11 },
@@ -234,7 +235,7 @@ function setup() {
 			{ x: width * 3 / 4 + 140, y: height / 2 - 50, bond: -1, id: 16 },
 			{ x: width * 3 / 4 + 140, y: height / 2 + 50, bond: -1, id: 17 },
 		],
-		]
+	]
 
 	var compounds = [
 		{ name: "H2O", c1: "H", c2: "O", c3: "H", array: h2o },
@@ -362,6 +363,20 @@ function draw() {
 	stroke("#8CED8C");
 	line(100, 100, width - 100 - (width - 200) / 2, 100);
 	noStroke();
+	if (correct) {
+		fill("#8CED8C");
+	} else {
+		fill("#FF0000")
+	}
+	ellipse(width / 2, height - 100, 100, 100)
+	correct = true;
+	for (x = 0; x < electrons.length; x++) {
+		for (y = 0; y < electrons[x].length; y++) {
+			if (answer[x][y].bond != electrons[x][y].bond) {
+				correct = false;
+			}
+		}
+	}
 }
 
 function mousePressed() {
@@ -396,13 +411,5 @@ function mousePressed() {
 				}
 			}
 		}
-	}
-}
-
-function keyPressed() {
-	print(electrons);
-	print(answer);
-	if (answer == electrons) {
-		print("YAY");
 	}
 }
