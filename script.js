@@ -1,18 +1,19 @@
 var compound;
+var answer = [];
 var element1;
 var element2;
 var element3;
 var electrons = [];
 var selectedElectron = -1;
 var randomCompound;
-var table = [
+/*var table = [
 	["H", "Li", "Na", "K", "Rb", "Cs", "Fr"],
 	["Be", "Mg", "Ca", "Sr", "Ba", "Ra"],
 	["B", "Al", "Ga", "In", "Tl"],
 	["N", "P", "As", "Sb", "Bi"],
 	["O", "S", "Se", "Te", "Po"],
 	["F", "Cl", "Br", "I", "At"],
-]
+]*/
 
 function preload() {
 }
@@ -34,6 +35,23 @@ function setup() {
 			{ x: width * 2 / 4 - 50, y: height / 2 + 140, bond: -1, id: 4 },
 			{ x: width * 2 / 4 - 140, y: height / 2, bond: -1, id: 5 },
 			{ x: width * 2 / 4 + 140, y: height / 2, bond: -1, id: 6 },
+		],
+		[
+			{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 7 },
+		],
+	]
+
+	var h2oAnswer = [
+		[
+			{ x: width * 1 / 4 + 140, y: height / 2, bond: -1, id: 0 },
+		],
+		[
+			{ x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 1 },
+			{ x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 2 },
+			{ x: width * 2 / 4 + 50, y: height / 2 + 140, bond: -1, id: 3 },
+			{ x: width * 2 / 4 - 50, y: height / 2 + 140, bond: -1, id: 4 },
+			{ x: width * 2 / 4 - 140, y: height / 2, bond: 0, id: 5 },
+			{ x: width * 2 / 4 + 140, y: height / 2, bond: 7, id: 6 },
 		],
 		[
 			{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 7 },
@@ -64,6 +82,31 @@ function setup() {
 			{ x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1, id: 15 },
 		],
 	]	
+
+	var co2Answer = [
+		[
+			{ x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1, id: 0 },
+			{ x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1, id: 1 },
+			{ x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1, id: 2 },
+			{ x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1, id: 3 },
+			{ x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1, id: 4 },
+			{ x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1, id: 5 },
+		],
+		[
+			{ x: width * 2 / 4 - 140, y: height / 2 - 50, bond: 4, id: 6 },
+			{ x: width * 2 / 4 - 140, y: height / 2 + 50, bond: 5, id: 7 },
+			{ x: width * 2 / 4 + 140, y: height / 2 - 50, bond: 14, id: 8 },
+			{ x: width * 2 / 4 + 140, y: height / 2 + 50, bond: 15, id: 9 },
+		],
+		[
+			{ x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1, id: 10 },
+			{ x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1, id: 11 },
+			{ x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1, id: 12 },
+			{ x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1, id: 13 },
+			{ x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1, id: 14 },
+			{ x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1, id: 15 },
+		],
+	]	
 	
 	var h2s = [
 		[
@@ -76,6 +119,23 @@ function setup() {
 			{ x: width * 2 / 4 - 50, y: height / 2 + 140, bond: -1, id: 4 },
 			{ x: width * 2 / 4 - 140, y: height / 2, bond: -1, id: 5 },
 			{ x: width * 2 / 4 + 140, y: height / 2, bond: -1, id: 6 },
+		],
+		[
+			{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 7 },
+		],
+	]
+
+	var h2sAnswer = [
+		[
+			{ x: width * 1 / 4 + 140, y: height / 2, bond: -1, id: 0 },
+		],
+		[
+			{ x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 1 },
+			{ x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 2 },
+			{ x: width * 2 / 4 + 50, y: height / 2 + 140, bond: -1, id: 3 },
+			{ x: width * 2 / 4 - 50, y: height / 2 + 140, bond: -1, id: 4 },
+			{ x: width * 2 / 4 - 140, y: height / 2, bond: 0, id: 5 },
+			{ x: width * 2 / 4 + 140, y: height / 2, bond: 7, id: 6 },
 		],
 		[
 			{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 7 },
@@ -101,7 +161,54 @@ function setup() {
 		],
 	]
 
-		var nocl = [
+	var hcnAnswer = [
+		[
+			{ x: width * 1 / 4 + 140, y: height / 2, bond: -1, id: 0 },
+		],
+		[
+			{ x: width * 2 / 4 - 140, y: height / 2, bond: 0, id: 1 },
+			{ x: width * 2 / 4 + 140, y: height / 2 - 50, bond: 5, id: 2 },
+			{ x: width * 2 / 4 + 140, y: height / 2, bond: 6, id: 3 },
+			{ x: width * 2 / 4 + 140, y: height / 2 + 50, bond: 7, id: 4 },
+		],
+		[
+			{ x: width * 3 / 4 - 140, y: height / 2 - 50, bond: -1, id: 5 },
+			{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 6 },
+			{ x: width * 3 / 4 - 140, y: height / 2 + 50, bond: -1, id: 7 },
+			{ x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1 - 140, id: 8 },
+			{ x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1 - 140, id: 9 },
+		],
+	]
+
+	var nocl = [
+	[
+		{ x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1, id: 0 },
+		{ x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1, id: 1 },
+		{ x: width * 1 / 4 - 50, y: height / 2 + 140, bond: -1, id: 2 },
+		{ x: width * 1 / 4 + 50, y: height / 2 + 140, bond: -1, id: 3 },
+		{ x: width * 1 / 4 + 140, y: height / 2 - 50, bond: -1, id: 4 },
+		{ x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1, id: 5 },
+	],
+	[
+		{ x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1, id: 6 },
+		{ x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1, id: 7 },
+		{ x: width * 2 / 4 + 140, y: height / 2, bond: -1, id: 8 },
+		{ x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 9 },
+		{ x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 10 },
+
+	],
+	[
+		{ x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1, id: 11 },
+		{ x: width * 3 / 4 - 50, y: height / 2 - 140, bond: -1, id: 12 },
+		{ x: width * 3 / 4 + 50, y: height / 2 + 140, bond: -1, id: 13 },
+		{ x: width * 3 / 4 - 50, y: height / 2 + 140, bond: -1, id: 14 },
+		{ x: width * 3 / 4 - 140, y: height / 2, bond: -1, id: 15 },
+		{ x: width * 3 / 4 + 140, y: height / 2 - 50, bond: -1, id: 16 },
+		{ x: width * 3 / 4 + 140, y: height / 2 + 50, bond: -1, id: 17 },
+	],
+	]
+
+	var noclAnswer = [
 		[
 			{ x: width * 1 / 4 - 50, y: height / 2 - 140, bond: -1, id: 0 },
 			{ x: width * 1 / 4 + 50, y: height / 2 - 140, bond: -1, id: 1 },
@@ -111,12 +218,12 @@ function setup() {
 			{ x: width * 1 / 4 + 140, y: height / 2 + 50, bond: -1, id: 5 },
 		],
 		[
-			{ x: width * 2 / 4 - 140, y: height / 2 - 50, bond: -1, id: 6 },
-			{ x: width * 2 / 4 - 140, y: height / 2 + 50, bond: -1, id: 7 },
-			{ x: width * 2 / 4 + 140, y: height / 2, bond: -1, id: 8 },
+			{ x: width * 2 / 4 - 140, y: height / 2 - 50, bond: 4, id: 6 },
+			{ x: width * 2 / 4 - 140, y: height / 2 + 50, bond: 5, id: 7 },
+			{ x: width * 2 / 4 + 140, y: height / 2, bond: 15, id: 8 },
 			{ x: width * 2 / 4 - 50, y: height / 2 - 140, bond: -1, id: 9 },
 			{ x: width * 2 / 4 + 50, y: height / 2 - 140, bond: -1, id: 10 },
-
+	
 		],
 		[
 			{ x: width * 3 / 4 + 50, y: height / 2 - 140, bond: -1, id: 11 },
@@ -127,7 +234,7 @@ function setup() {
 			{ x: width * 3 / 4 + 140, y: height / 2 - 50, bond: -1, id: 16 },
 			{ x: width * 3 / 4 + 140, y: height / 2 + 50, bond: -1, id: 17 },
 		],
-	]
+		]
 
 	var compounds = [
 		{ name: "H2O", c1: "H", c2: "O", c3: "H", array: h2o },
@@ -135,6 +242,14 @@ function setup() {
 		{ name: "H2S", c1: "H", c2: "S", c3: "H", array: h2s },
 		{ name: "HCN", c1: "H", c2: "C", c3: "N", array: hcn },
 		{ name: "NOCl", c1: "O", c2: "N", c3: "Cl", array: nocl },
+	]
+
+	var compoundsAnswer = [
+		{ name: "H2O", c1: "H", c2: "O", c3: "H", array: h2oAnswer },
+		{ name: "CO2", c1: "O", c2: "C", c3: "O", array: co2Answer },
+		{ name: "H2S", c1: "H", c2: "S", c3: "H", array: h2sAnswer },
+		{ name: "HCN", c1: "H", c2: "C", c3: "N", array: hcnAnswer },
+		{ name: "NOCl", c1: "O", c2: "N", c3: "Cl", array: noclAnswer },
 	]
 
 	electrons = [
@@ -166,6 +281,7 @@ function setup() {
 	];
 	randomCompound = Math.floor(Math.random() * compounds.length);
 	electrons = compounds[randomCompound].array
+	answer = compoundsAnswer[randomCompound].array
 	element1 = compounds[randomCompound].c1
 	element2 = compounds[randomCompound].c2
 	element3 = compounds[randomCompound].c3
@@ -240,6 +356,12 @@ function draw() {
 			}
 		}
 	}
+	strokeWeight(40);
+	stroke("#000000");
+	line(100, 100, width - 100, 100);
+	stroke("#8CED8C");
+	line(100, 100, width - 100 - (width - 200) / 2, 100);
+	noStroke();
 }
 
 function mousePressed() {
@@ -279,4 +401,8 @@ function mousePressed() {
 
 function keyPressed() {
 	print(electrons);
+	print(answer);
+	if (answer == electrons) {
+		print("YAY");
+	}
 }
