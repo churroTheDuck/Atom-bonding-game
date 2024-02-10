@@ -22,6 +22,7 @@ function preload() {
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	imageMode(CENTER);
+	rectMode(CENTER);
 	ellipseMode(CENTER);
 	textAlign(CENTER, CENTER);
 
@@ -368,7 +369,15 @@ function draw() {
 	} else {
 		fill("#FF0000")
 	}
-	ellipse(width / 2, height - 100, 100, 100)
+	rectMode(CORNERS);
+	rect(0, height - 100, width, height);	
+	fill("#000000");
+	if (correct) {
+		text("Correct! Press any key to continue.", width / 2, height - 50);
+	} else {
+		text("Click on the electrons around the middle atom, then click on the electrons around a nearby atom to bond the electrons.", width / 2, height - 50);
+	}
+	rectMode(CENTER);
 	correct = true;
 	for (x = 0; x < electrons.length; x++) {
 		for (y = 0; y < electrons[x].length; y++) {
