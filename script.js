@@ -8,7 +8,7 @@ var selectedElectron = -1;
 var correct;
 var solved = false;
 var randomCompound;
-var score = 9;
+var score = 10;
 var compounds;
 var compoundsAnswer;
 var h2o;
