@@ -3,11 +3,38 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>Chemical Reactions</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
   </head>
-  <body>
+  <body style="background-color: #36393B;">
+    <p style="width: 100%; text-align: center; font-size: 25pt; font-family: Helvetica; color: #FFFFFF;">Chemical Reaction Types</p>
+    <button class="collapsible">Synthesis</button>
+    <div class="content">
+        <p class="text">Two or more reactants combine to create a new compound</p>
+        <img src="synthesis.svg" class="example"></img>
+    </div>
+    <button class="collapsible">Decomposition</button>
+    <div class="content">
+        <p class="text">A compound breaks into two or more substances</p>
+        <img src="decomposition.svg" class="example"></img>
+    </div>
+    <button class="collapsible">Single Replacement</button>
+    <div class="content">
+        <p class="text">An element replaces another element in a compound</p>
+        <img src="single-replacement.svg" class="example"></img>
+    </div>   
+    <button class="collapsible">Double Replacement</button>
+    <div class="content">
+        <p class="text">Two compounds rearrange to create two new compounds</p>
+        <img src="double-replacement.svg" class="example"></img>
+    </div>
+    <button class="collapsible">Combustion</button>
+    <div class="content">
+        <p class="text">A substance reacts with oxygen gas to produce water vapor and creates heat and light.</p>
+        <img src="combustion.svg" class="example"></img>
+    </div>
+    <p style="width: 100%; text-align: center; font-size: 25pt; font-family: Helvetica; color: #FFFFFF;">Chemical Reaction Quiz</p>
+    <p id="equation" class="equation"></p>
     <script src="script.js"></script>
   </body>
 </html>
