@@ -14,10 +14,18 @@ for (i = 0; i < coll.length; i++) {
 }
 
 var elements = [
-  "Al", "Au", "O", "Ar", "He", "P", "Ba", "H", "Pt", "Be", "I", "K", "B", "Fe", "Si", "Br", "Pb", "Ag", "Cd", "Li", "Na", "Ca", "Mg", "Sr", "C", "Mn", "S", "Cl", "Hg", "Sn", "Cr", "Ne", "U", "Cu", "Ni", "Xe", "F", "N", "Zn"
+    "P", "H", "C", "S", "N", "O"
 ]
 
-var element1 = elements[Math.floor(Math.random() * ((elements.length - 1) - 0 + 1) + 0)]
-var element2 = elements[Math.floor(Math.random() * ((elements.length - 1) - 0 + 1) + 0)]
-var compound = element1 + " + " + element2
+var element1 = elements[Math.floor(Math.random() * ((elements.length - 1) - 0 + 1) + 0)];
+elements.splice(elements.indexOf(element1), 1);
+var element2 = elements[Math.floor(Math.random() * ((elements.length - 1) - 0 + 1) + 0)];
+elements = [
+    "P", "H", "C", "S", "N", "O"
+]
+if (elements.indexOf(element1) > elements.indexOf(element2)) {
+    var compound = element2 + " + " + element1 + " → " + element2 + element1;
+} else {
+    var compound = element1 + " + " + element2 + " → " + element1 + element2;
+}
 document.getElementById("equation").innerHTML = compound;
